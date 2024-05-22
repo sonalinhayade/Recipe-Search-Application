@@ -14,7 +14,6 @@ const IngredientSearchForm = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const [selectedLetter, setSelectedLetter] = useState("A"); // Default to "A"
-//   const itemsPerPage = 10;
 
   useEffect(() => {
     dispatch(fetchIngredients());
@@ -32,7 +31,7 @@ const IngredientSearchForm = () => {
     if (filteredIngredients.length === 0) {
       navigate(`/no-recipe`);
     } else {
-      navigate(`/recipes?ingredient=${term}`);
+      navigate(`/recipes?ingredient=${term}&page=${currentPage}`);
     }
   };
 
