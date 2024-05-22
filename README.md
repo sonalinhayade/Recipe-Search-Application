@@ -60,7 +60,8 @@ To start the development server, run:
 npm start
 ```
 
-Open [http://localhost:3000](http://localhost:3000/) in your browser to view the application.
+[Visit my Recipe Search Application on Netlify](https://recipe-search-applications.netlify.app/)
+
 
 ## Technologies Used
 
