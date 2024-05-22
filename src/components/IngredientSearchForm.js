@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchIngredients } from "../redux/slices/IngredientsSlice";
 import { useNavigate } from "react-router-dom";
 import { Container, Row, Col, Form } from "react-bootstrap";
-import { FaSearch } from "react-icons/fa";
+import { FaSearch, FaArrowLeft, FaArrowRight } from "react-icons/fa";
 import "../App.css";
 
 const IngredientSearchForm = () => {
@@ -12,8 +12,7 @@ const IngredientSearchForm = () => {
   const ingredients = useSelector((state) => state.ingredients.ingredients);
   const loading = useSelector((state) => state.ingredients.loading);
   const [searchTerm, setSearchTerm] = useState("");
-  const [currentPage, setCurrentPage] = useState(1);
-  const [selectedLetter, setSelectedLetter] = useState("A"); // Default to "A"
+  const [selectedLetter, setSelectedLetter] = useState("A");
 
   useEffect(() => {
     dispatch(fetchIngredients());
@@ -31,32 +30,16 @@ const IngredientSearchForm = () => {
     if (filteredIngredients.length === 0) {
       navigate(`/no-recipe`);
     } else {
-      navigate(`/recipes?ingredient=${term}&page=${currentPage}`);
+      navigate(`/recipes?ingredient=${term}&page=1`);
     }
-  };
-
-  const handleIngredientClick = (ingredient) => {
-    setSearchTerm(ingredient);
-    navigateToRecipes(ingredient);
-  };
-
-  const generatePageLetters = () => {
-    const letters = [];
-    for (let i = 65; i <= 90; i++) {
-      letters.push(String.fromCharCode(i));
-    }
-    return letters;
   };
 
   const handleLetterClick = (letter) => {
     setSelectedLetter(letter);
-    setCurrentPage(1);
   };
 
   const filteredIngredients = ingredients.filter((ingredient) =>
-    ingredient.strIngredient
-      .toLowerCase()
-      .startsWith(searchTerm.toLowerCase())
+    ingredient.strIngredient.toLowerCase().startsWith(searchTerm.toLowerCase())
   );
 
   return (
@@ -83,7 +66,6 @@ const IngredientSearchForm = () => {
                   </button>
                 </Form>
                 <div className="quote-container">
-                 
                   <h2 className="personalize-text personalize-text-middle">
                     Cooking is an art, and we have the recipes to make you a
                     master artist
@@ -108,7 +90,7 @@ const IngredientSearchForm = () => {
                     <div
                       className="ingredient-item"
                       onClick={() =>
-                        handleIngredientClick(ingredient.strIngredient)
+                        navigateToRecipes(ingredient.strIngredient)
                       }
                     >
                       {ingredient.strIngredient}
@@ -116,19 +98,41 @@ const IngredientSearchForm = () => {
                   </Col>
                 ))}
           </Row>
-
           <div className="pagination">
-            {generatePageLetters().map((letter, index) => (
-              <button
-                key={index}
-                className={`pagination-button ${
-                  selectedLetter === letter ? "active" : ""
-                }`}
-                onClick={() => handleLetterClick(letter)}
-              >
-                {letter}
-              </button>
-            ))}
+            {/* Left arrow */}
+            <FaArrowLeft
+              className="pagination-arrow"
+              onClick={() => {
+                // Handle left arrow click
+              }}
+            />
+            {/* Letters */}
+            {Array.from({ length: 26 }, (_, i) => String.fromCharCode(65 + i))
+              .filter((letter) =>
+                filteredIngredients.some((ingredient) =>
+                  ingredient.strIngredient
+                    .toLowerCase()
+                    .startsWith(letter.toLowerCase())
+                )
+              )
+              .map((letter) => (
+                <button
+                  key={letter}
+                  className={`pagination-button ${
+                    selectedLetter === letter ? "active" : ""
+                  }`}
+                  onClick={() => handleLetterClick(letter)}
+                >
+                  {letter}
+                </button>
+              ))}
+            {/* Right arrow */}
+            <FaArrowRight
+              className="pagination-arrow"
+              onClick={() => {
+                // Handle right arrow click
+              }}
+            />
           </div>
         </Container>
       </div>
