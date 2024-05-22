@@ -21,7 +21,7 @@ body, html {
     padding: 20px;
   }
   
-  .header-content {
+  .header-content, .header-content-list {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -36,28 +36,22 @@ body, html {
     text-align: center;
   }
   
-  
   .search-form {
     display: flex;
     justify-content: center;
-    margin-bottom: 40px;
-  }
-  
-  .search-form-list {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 90px;
-    margin-top: -100px;
+    align-items: center;
+    margin-bottom: 20px;
   }
   
   .search-input {
-    width: 500px;
+    width: 400px; 
+    max-width: 100%; 
     height: 40px;
     border-radius: 20px;
     border: none;
     padding: 10px 20px;
     font-size: 16px;
-    margin-right: 20px;
+    margin-right: 10px;
   }
   
   .search-button {
@@ -73,37 +67,24 @@ body, html {
     justify-content: center;
   }
   
-  
-  .search-button:focus,
-  .search-list-button:focus {
+  .search-button:focus {
     outline: none; 
-  }
-  
-  
-  
-  .search-list-button {
-    margin-left: 560px; 
-    margin-top: -58px;
-    border-radius: 50%;
-    border: none;
-    background-color: #F57D1F;
-    color: white;
-    font-size: 24px;
-    width: 55px;
-    height: 55px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
   }
   
   .quote-container {
     text-align: center;
-    margin: 20px auto;
+    margin: 20px auto; 
     padding: 20px;
     background: rgba(0, 0, 0, 0.6);
     border-radius: 10px;
     max-width: 700px;
     animation: fadeInSlideUp 1s ease-in-out;
+    box-sizing: border-box; 
+  }
+  
+  .quote-container {
+    padding-left: 20px;
+    padding-right: 20px;
   }
   
   .personalize-text {
@@ -118,6 +99,60 @@ body, html {
   .personalize-text-middle {
     margin-top: 10px; 
   }
+  
+  @media (max-width: 768px) {
+    .search-input {
+      width: 60%; 
+    }
+  
+    .search-button {
+      width: 50px;
+      height: 50px;
+      font-size: 20px;
+    }
+  
+    .quote-container {
+      padding: 15px;
+      max-width: 90%;
+      margin: 0 auto; 
+    }
+  
+    .personalize-text {
+      font-size: 1.2em;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .search-form {
+      flex-direction: column;
+      align-items: center;
+    }
+  
+    .search-input {
+      width: 80%; 
+      margin-right: 0;
+      margin-bottom: 10px;
+    }
+  
+    .search-button {
+      width: 45px;
+      height: 45px;
+      font-size: 20px;
+      margin: 0 auto;
+    }
+  
+    .quote-container {
+      padding: 10px;
+      max-width: 100%;
+      margin: 10px; 
+      box-sizing: border-box; 
+    }
+  
+    .personalize-text {
+      font-size: 1em;
+    }
+  }
+  
   
   
   .ingredient-container {
@@ -163,12 +198,12 @@ body, html {
     justify-content: center;
     align-items: center;
     position: fixed;
-    bottom: 20px; /* Adjust this value as needed */
+    bottom: 20px;
     left: 0;
     width: 100%;
-    background-color: transparent; 
+    background-color: transparent;
     box-shadow: none;
-    z-index: 1; 
+    z-index: 1;
   }
   
   .pagination-button {
@@ -189,15 +224,53 @@ body, html {
     font-weight: 500;
   }
   
-  
   .pagination-button.active {
     background-color: lightgray;
     color: black;
   }
   
   .pagination-button:hover {
-    background-color: #F57D1F;
+    background-color: #f57d1f;
     color: white;
+  }
+  
+  .pagination-arrow {
+    width: 30px;
+    height: 30px;
+    font-size: 20px;
+    padding: 10px;
+    background-color: lightgray;
+    color: black;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 10px;
+    margin-right: 20px
+  };
+  
+  .pagination-arrow:hover {
+    background-color: #f57d1f;
+    color: white;
+  }
+  
+  @media (max-width: 768px) {
+    .pagination-button {
+      display: none;
+    }
+  
+    .pagination {
+      justify-content: space-between;
+    }
+  
+    .pagination-arrow {
+      width: 30px;
+      height: 30px;
+      font-size: 16px;
+    }
   }
   
   
@@ -212,13 +285,21 @@ body, html {
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); 
     gap: 40px;
   }
+  .recipe-list-container {
+    padding-top:50px
+  }
+  
+  .recipe-card-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); 
+    gap: 20px;
+  }
   
   .recipe-list-card {
     background-color: #fff;
     border-radius: 20px; 
     padding: 40px; 
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
     border: 1px solid black;
   }
   
@@ -260,7 +341,8 @@ body, html {
   
   .no-recipe-found-container {
     font-size: 24px; 
-    font-weight: bold;   color: white;
+    font-weight: bold;   
+    color: white;
     background-color: #333; 
     padding: 20px; 
     border-radius: 10px; 
@@ -272,7 +354,68 @@ body, html {
     transform: translate(-50%, -50%); 
   }
   
+  .header-list {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
   
+  .home-button-container {
+    margin-right: 10px;
+  }
+  
+  .search-form-list {
+    flex-grow: 1; 
+    display: flex;
+    align-items: center;
+    justify-content: center; 
+  }
+  
+  .search-input-list {
+    width: 100%;
+    max-width: 400px;
+    height: 40px;
+    border-radius: 20px;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    margin-right: 10px;
+  }
+  
+  .search-button-list {
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+  }
+  
+  .search-ingredient-list {
+    color: white;
+    font-size: 24px;
+    background-color: #F57D1F;
+    border-radius: 50%;
+    padding: 15px;
+  }
+  
+  @media (max-width: 768px) {
+    .header-list {
+      flex-direction: column;
+      align-items: center;
+    }
+  
+    .home-button-container {
+      margin-bottom: 10px;
+    }
+  
+    .search-form-list {
+      width: 100%;
+      justify-content: center;
+    }
+  }
+  
+  
+  
+
+   
   /* RecipeDetails.css */
   
   .recipe-details-container { 
@@ -371,7 +514,6 @@ body, html {
   .home-button-container {
     display: flex;
     justify-content: flex-start;
-    margin:40px
   }
   
   .home-button {
@@ -380,11 +522,10 @@ body, html {
     padding: 10px 20px; 
     border-radius: 10px; 
     text-decoration: none; 
-    
   }
   
   .home-icon{
-    font-size: 50px;
+    font-size: 30px;
   }
   
   .home-button:hover {
