@@ -60,7 +60,7 @@ To start the development server, run:
 npm start
 ```
 
-[Visit my Recipe Search Application on Netlify](https://recipe-search-applications.netlify.app/)
+[Visit my Recipe Search Application on Vercel](https://recipe-search-application-9z9mco49d-sonalinhayades-projects.vercel.app)
 
 
 ## Technologies Used
