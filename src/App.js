@@ -1,25 +1,23 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { Provider } from 'react-redux';
+import store from './redux/store';
+import IngredientSearchForm from './components/IngredientSearchForm.js';
+import RecipeList from './components/RecipeList.js';
+import RecipeDetails from './components/RecipeDetails.js';
+import NoRecipeFound from './components/NoRecipeFound.js';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+const App = () => (
+  <Provider store={store}>
+    <Router>
+      <Routes>
+        <Route path="/" element={<IngredientSearchForm />} />
+        <Route path="/recipes" element={<RecipeList />} />
+        <Route path="/recipe/:id" element={<RecipeDetails />} />
+        <Route path="/no-recipe" element={<NoRecipeFound />} /> 
+      </Routes>
+    </Router>
+  </Provider>
+);
 
 export default App;
